@@ -5282,7 +5282,7 @@ short initEntity(short actionScript, short x, short y) {
 	}
 	tracef("Initializing entity slot %s with %s at %s,%s", newEntity / 2, cast(ActionScript)actionScript, x, y);
 	bool __ignored;
-	short newScript = unknownC09D03(__ignored);
+	short newScript = allocateScriptSlot(__ignored);
 	entityScriptIndexTable[newEntity / 2] = newScript;
 	entityScriptUnknown125A[newScript / 2] = -1;
 	entityMoveCallbacks[newEntity / 2] = &updateActiveEntityPosition2D;
@@ -5309,7 +5309,7 @@ short initEntity(short actionScript, short x, short y) {
 	//Unreachable code?
 	/+
 	unknownC09C99();
-	short newScript2 = unknownC09D03(__ignored);
+	short newScript2 = allocateScriptSlot(__ignored);
 	entityScriptIndexTable[newEntity / 2] = newScript2;
 	entityScriptUnknown125A[newScript2 / 2] = -1;
 	+/
@@ -5321,7 +5321,7 @@ short initEntity(short actionScript, short x, short y) {
 	entityDeltaYTable[newEntity / 2] = 0;
 	entityDeltaZFractionTable[newEntity / 2] = 0;
 	entityDeltaZTable[newEntity / 2] = 0;
-	return unknownC092F5Unknown4(&actionScriptScriptPointers[actionScript][0], newEntity);
+	return finishInitEntity(&actionScriptScriptPointers[actionScript][0], newEntity);
 }
 
 short setEntityActionScript(const(ubyte)* pc, short entityID) {
@@ -5331,13 +5331,13 @@ short setEntityActionScriptByOffset(const(ubyte)* pc, short entityIndex) {
 	assert (entityScriptTable[entityIndex / 2] >= 0);
 	entityIndex = unknownC09C99(entityIndex);
 	bool __ignored;
-	short newScript = unknownC09D03(__ignored);
+	short newScript = allocateScriptSlot(__ignored);
 	entityScriptIndexTable[entityIndex / 2] = newScript;
 	entityScriptUnknown125A[newScript / 2] = -1;
-	return unknownC092F5Unknown4(pc, entityIndex);
+	return finishInitEntity(pc, entityIndex);
 }
 
-short unknownC092F5Unknown4(const(ubyte)* pc, short entityIndex) {
+short finishInitEntity(const(ubyte)* pc, short entityIndex) {
 	clearSpriteTickCallback(entityIndex);
 	entityProgramCounters[entityScriptIndexTable[entityIndex / 2] / 2] = pc;
 	entityScriptSleepFrames[entityScriptIndexTable[entityIndex / 2] / 2] = 0;
@@ -5390,7 +5390,7 @@ void runActionscriptFrame() {
 		currentEntitySlot = x;
 		currentEntitySlot /= 2;
 		unknown7E0A56 = entityNextEntityTable[currentEntitySlot];
-		unknownC094D0(unknown7E0A56,x);
+		unknownC094D0(x);
 	} while ((x = unknown7E0A56) >= 0);
 	if (firstEntity < 0) {
 		unknown7E0A60 = 0;
@@ -5412,7 +5412,7 @@ void runActionscriptFrame() {
 }
 
 /// $C09466
-void unknownC094D0(short a, short x) {
+void unknownC094D0(short x) {
 	if ((entityTickCallbackFlags[x / 2] & objectMoveDisabled) == 0) {
 		short y = entityScriptIndexTable[x / 2];
 		do {
@@ -5902,7 +5902,7 @@ const(ubyte)* movementCode0C13Common(short y) {
 const(ubyte)* movementCode07(const(ubyte)* y) {
 	actionScriptVar94 = y;
 	bool carry;
-	short regY = unknownC09D03(carry);
+	short regY = allocateScriptSlot(carry);
 	if (!carry) {
 		unknown7E0A58 = regY;
 		entityScriptUnknown125A[regY / 2] = entityScriptUnknown125A[actionScriptVar8A / 2];
@@ -6294,7 +6294,7 @@ void unknownC09CD7() {
 }
 
 /// $C09D03 - allocates a script slot
-short unknownC09D03(out bool flag) {
+short allocateScriptSlot(out bool flag) {
 	short result = unknown7E0A54;
 	if (result < 0) {
 		flag = true;
@@ -7340,13 +7340,13 @@ void unknownC0A959(short, ref const(ubyte)* arg2) {
 	unknownC469F1(tmp);
 }
 
-/// $C0A964
-void unknownC0A964(short, ref const(ubyte)* arg2) {
-	short tmp = movementDataRead16(arg2);
-	actionScriptVar94 = arg2;
-	short tmp2 = movementDataRead16(arg2);
-	actionScriptVar94 = arg2;
-	unknownC47225(tmp, tmp2);
+/// $C0A964 - loadAbsXYTable
+void loadAbsXYTable(short, ref const(ubyte)* offset) {
+	short yOffset = movementDataRead16(offset);
+	actionScriptVar94 = offset;
+	short xOffset = movementDataRead16(offset);
+	actionScriptVar94 = offset;
+	loadAbsXYTableIntoEntityScriptVars(yOffset, xOffset);
 }
 
 /// $C0A977

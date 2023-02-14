@@ -100,7 +100,7 @@ void unlockInput() {
 	inputLockFlag = 0;
 }
 
-/// $C100D6
+/// $C100D6 -- pause {arg1} ticks ?
 void unknownC100D6(ushort arg1) {
 	clearInstantPrinting();
 	windowTick();
@@ -2715,7 +2715,7 @@ void* cc1F21(DisplayTextState* arg1, ubyte arg2) {
 }
 
 /// $C14EAB
-void* cc10(DisplayTextState* arg1, ubyte arg2) {
+void* cc10(DisplayTextState* arg1, ubyte arg2) {  // cc 10 - wait
 	unknownC100D6(arg2);
 	return null;
 }

@@ -5709,12 +5709,12 @@ short spawn() {
 	return result;
 }
 
-/// $C47225
-void unknownC47225(short arg1, short arg2) {
-	entityScriptVar0Table[currentEntitySlot] = cast(short)(entityAbsXTable[currentEntitySlot] - arg2);
-	entityScriptVar1Table[currentEntitySlot] = cast(short)(entityAbsXTable[currentEntitySlot] + arg2);
-	entityScriptVar2Table[currentEntitySlot] = cast(short)(entityAbsYTable[currentEntitySlot] - arg1);
-	entityScriptVar3Table[currentEntitySlot] = cast(short)(entityAbsYTable[currentEntitySlot] + arg1);
+/// $C47225 - loadAbsXYTableIntoEntityScriptVars
+void loadAbsXYTableIntoEntityScriptVars(short yOffset, short xOffset) {
+	entityScriptVar0Table[currentEntitySlot] = cast(short)(entityAbsXTable[currentEntitySlot] - xOffset);
+	entityScriptVar1Table[currentEntitySlot] = cast(short)(entityAbsXTable[currentEntitySlot] + xOffset);
+	entityScriptVar2Table[currentEntitySlot] = cast(short)(entityAbsYTable[currentEntitySlot] - yOffset);
+	entityScriptVar3Table[currentEntitySlot] = cast(short)(entityAbsYTable[currentEntitySlot] + yOffset);
 }
 
 /// $C47269
@@ -6638,8 +6638,8 @@ void unknownC4D8FA() {
 	}
 }
 
-/// $C4D989
-short unknownC4D989(short arg1) {
+/// $C4D989   // execute intro {segmentNum}
+short playAttractMode(short segmentNum) {
 	unknownC0927C();
 	clearSpriteTable();
 	spriteVramTableOverwrite(short.min, 0);
@@ -6664,7 +6664,7 @@ short unknownC4D989(short arg1) {
 	unknown7E9641 = 0;
 	short x12 = 0;
 	short x14 = 0;
-	displayText(getTextBlock(attractModeText[arg1]));
+	displayText(getTextBlock(attractModeText[segmentNum]));
 	while (unknown7E9641 == 0) {
 		unknownC4A7B0();
 		if (((padPress[0] & Pad.a) != 0) || ((padPress[0] & Pad.b) != 0) || ((padPress[0] & Pad.start) != 0)) {
@@ -6694,7 +6694,7 @@ short unknownC4D989(short arg1) {
 
 /// $C4DAD2
 void initIntro() {
-	short x02 = 0;
+	short attractModeSegment = 0;
 	unknown7EB4B6 = 1;
 	musicEffect(MusicEffect.quickFade);
 	unknownC0927C();
@@ -6717,8 +6717,8 @@ void initIntro() {
 	updateScreen();
 	short x;
 	while (x == 0) {
-		switch (x02) {
-			case 0:
+		switch (attractModeSegment) {
+			case 0: // segment 0 : fade out, transition to title screen
 				if (logoScreen() != 0) {
 					musicEffect(MusicEffect.quickFade);
 					if ((mirrorINIDISP & 0x80) != 0) {
@@ -6726,12 +6726,12 @@ void initIntro() {
 					}
 					changeMusic(Music.titleScreen);
 					x = showTitleScreen(1);
-					x02 = 2;
+					attractModeSegment = 2;
 				} else {
 					x = 0;
 				}
 				break;
-			case 1:
+			case 1: // segment 1 : gas station
 				changeMusic(Music.gasStation);
 				if (gasStation() != 0) {
 					musicEffect(MusicEffect.quickFade);
@@ -6744,45 +6744,45 @@ void initIntro() {
 					mirrorTD = 0;
 					changeMusic(Music.titleScreen);
 					x = showTitleScreen(1);
-					x02++;
+					attractModeSegment++;
 				} else {
 					x = 0;
 				}
 				break;
-			case 2:
-				changeMusic(Music.titleScreen);
+			case 2: // segment 2: title screen
+				//changeMusic(Music.titleScreen);
 				x = showTitleScreen(0);
 				break;
-			case 3:
-				changeMusic(Music.attractMode);
-				x = unknownC4D989(0);
+			case 3: // segment 3: attract mode scene 0
+				//changeMusic(Music.attractMode);
+				x = playAttractMode(0);
 				break;
-			case 4:
-				x = unknownC4D989(2);
+			case 4: // segment 4: attract mode scene 2
+				x = playAttractMode(2);
 				break;
-			case 5:
-				x = unknownC4D989(3);
+			case 5: // segment 5: attract mode scene 3
+				x = playAttractMode(3);
 				break;
-			case 6:
-				x = unknownC4D989(4);
+			case 6: // segment 6: attract mode scene 4
+				x = playAttractMode(4);
 				break;
-			case 7:
-				x = unknownC4D989(5);
+			case 7: // segment 7: attract mode scene 5
+				x = playAttractMode(5);
 				break;
-			case 8:
-				x = unknownC4D989(6);
+			case 8: // segment 8: attract mode scene 6
+				x = playAttractMode(6);
 				break;
-			case 9:
-				x = unknownC4D989(7);
+			case 9: // segment 9: attract mode scene 7
+				x = playAttractMode(7);
 				break;
-			case 10:
-				x = unknownC4D989(9);
+			case 10: // segment 10: attract mode scene 9
+				x = playAttractMode(9);
 				break;
 			default:
-				x02 = 1;
+				attractModeSegment = 1;
 				break;
 		}
-		x02++;
+		attractModeSegment++;
 	}
 	musicEffect(MusicEffect.quickFade);
 	unknown7E0028.a = 0;

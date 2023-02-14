@@ -1688,8 +1688,8 @@ ubyte[] ACTIONSCRIPT_C0A959(ushort val) {
 	return ACTIONSCRIPT_CALLROUTINE(&fixArgs!unknownC0A959, val);
 }
 
-ubyte[] ACTIONSCRIPT_C0A964(ushort val1, ushort val2) {
-	return ACTIONSCRIPT_CALLROUTINE(&fixArgs!unknownC0A964, val1, val2);
+ubyte[] ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(ushort val1, ushort val2) {
+	return ACTIONSCRIPT_CALLROUTINE(&fixArgs!loadAbsXYTable, val1, val2);
 }
 
 ubyte[] ACTIONSCRIPT_SPAWN_ENTITY_AT_SELF(OverworldSprite sprite, ActionScript script) {
@@ -5347,7 +5347,7 @@ actionScript18 = [
 	ACTIONSCRIPT_START_TASK(&unknownC3A262[0]),
 	ACTIONSCRIPT_C0A443ME2(),
 	ACTIONSCRIPT_C0A685(256),
-	ACTIONSCRIPT_C0A964(8, 8),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(8, 8),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 unknownC3BB73 = [
@@ -5874,7 +5874,7 @@ actionScript178 = [
 	ACTIONSCRIPT_START_TASK(&unknownC3A262[0]),
 	ACTIONSCRIPT_C0A443ME2(),
 	ACTIONSCRIPT_C0A685(256),
-	ACTIONSCRIPT_C0A964(24, 24),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(24, 24),
 	ACTIONSCRIPT_SHORTJUMP(&unknownC3AB9E[0]),
 ].join();
 actionScript179 = [
@@ -6162,7 +6162,7 @@ actionScript73 = [
 ].join();
 actionScript16 = [
 	ACTIONSCRIPT_SHORTCALL(&actionScript13_14_15_16_17_Common[0]),
-	ACTIONSCRIPT_C0A964(24, 8),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(24, 8),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 actionScript365 = [
@@ -9477,7 +9477,7 @@ unknownC427E0 = [
 ].join();
 actionScript17 = [
 	ACTIONSCRIPT_SHORTCALL(&actionScript13_14_15_16_17_Common[0]),
-	ACTIONSCRIPT_C0A964(24, 8),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(24, 8),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 unknownC3AAC2 = [
@@ -15698,7 +15698,7 @@ actionScript287 = [
 ].join();
 actionScript15 = [
 	ACTIONSCRIPT_SHORTCALL(&actionScript13_14_15_16_17_Common[0]),
-	ACTIONSCRIPT_C0A964(32, 32),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(32, 32),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 unknownC35231 = [
@@ -16823,7 +16823,7 @@ actionScript102 = [
 	ACTIONSCRIPT_START_TASK(&unknownC3A262[0]),
 	ACTIONSCRIPT_C0A443ME2(),
 	ACTIONSCRIPT_C0A685(256),
-	ACTIONSCRIPT_C0A964(24, 24),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(24, 24),
 	ACTIONSCRIPT_SHORTJUMP(&unknownC3AB9E[0]),
 ].join();
 actionScript533 = [
@@ -18966,7 +18966,7 @@ actionScript571 = [
 ].join();
 actionScript13 = [
 	ACTIONSCRIPT_SHORTCALL(&actionScript13_14_15_16_17_Common[0]),
-	ACTIONSCRIPT_C0A964(8, 8),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(8, 8),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 actionScript34 = [
@@ -21889,7 +21889,7 @@ actionScript108 = [
 	ACTIONSCRIPT_START_TASK(&unknownC3A262[0]),
 	ACTIONSCRIPT_C0A443ME2(),
 	ACTIONSCRIPT_C0A685(256),
-	ACTIONSCRIPT_C0A964(8, 8),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(8, 8),
 	ACTIONSCRIPT_SHORTJUMP(&unknownC3AB9E[0]),
 ].join();
 actionScript766 = [
@@ -22805,7 +22805,7 @@ actionScript223 = [
 ].join();
 actionScript14 = [
 	ACTIONSCRIPT_SHORTCALL(&actionScript13_14_15_16_17_Common[0]),
-	ACTIONSCRIPT_C0A964(16, 16),
+	ACTIONSCRIPT_LOAD_ABS_X_Y_TABLE(16, 16),
 	ACTIONSCRIPT_SHORTJUMP(&actionScript13_14_15_16_17_Common2[0]),
 ].join();
 actionScript83 = [
