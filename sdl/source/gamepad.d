@@ -103,7 +103,11 @@ auto getDefaultKeyboardMapping() pure @safe {
 		SDL_Scancode.SDL_SCANCODE_P: Controller.pause,
 		SDL_Scancode.SDL_SCANCODE_BACKSLASH: Controller.skipFrame,
 		SDL_Scancode.SDL_SCANCODE_GRAVE: Controller.fastForward,
-		SDL_Scancode.SDL_SCANCODE_ESCAPE: Controller.exit
+		SDL_Scancode.SDL_SCANCODE_ESCAPE: Controller.exit,
+		SDL_Scancode.SDL_SCANCODE_1: Controller.layer1Toggle,
+		SDL_Scancode.SDL_SCANCODE_2: Controller.layer2Toggle,
+		SDL_Scancode.SDL_SCANCODE_3: Controller.layer3Toggle,
+		SDL_Scancode.SDL_SCANCODE_4: Controller.layer4Toggle,
 	];
 }
 
