@@ -38,3 +38,8 @@ settings.yml
 text.cache
 save.yaml
 dump
+
+.DS_Store
+.vscode
+*.a
+*.dylib
