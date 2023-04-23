@@ -146,6 +146,7 @@ void main(string[] args) {
 				}
 				string label = scriptData.keys[0];
 				auto script = scriptData.values[0];
+				debug(dumpText) tracef("Loading text %s: '%s' (%s)", textDocFile.name, label, nextLabel);
 				loadText(script, label, nextLabel);
 			}
 			debug(dumpText) textData.toFile!(YAML, Siryulize.omitInits)(format!"dump/%s.yaml"(textDocFile.name));
