@@ -128,8 +128,15 @@ private SDL_Texture* drawTexture;
 private int lastTime;
 
 bool loadRenderer() {
-	if(loadSDL() < sdlSupport) {
+	SDLSupport sdlSupportStatus = loadSDL();
+	if(sdlSupportStatus < sdlSupport) {
 		info("Can't load SDL!");
+			if(sdlSupportStatus == SDLSupport.noLibrary) {
+				info("SDLSupport.noLibrary");
+			}
+			else if(sdlSupportStatus == SDLSupport.badLibrary) {
+				info("SDLSupport.badLibrary");
+			}
 		return false;
 	}
 	if(!loadSnesDrawFrame()) {
